@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#A86300">
+<meta name="description" content="Recetas, calculadoras y bitácora para elaborar propóleo según la NOM-003-SAG/GAN-2017.">
+<title>Recetario de propóleo</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Propóleo">
+<style>
+:root{
+  --bg:#FBF7EF; --surface:#FFFFFF; --surface-2:#F4ECDF; --text:#2A2118; --muted:#6B5D4F; --line:#E6DCCB;
+  --accent:#A86300; --accent-ink:#FFFFFF; --accent-soft:#FCEFD9;
+  --warn-ink:#7A4A00; --warn-bg:#FFF3D6; --danger-ink:#9B1C12; --danger-bg:#FDECEA;
+  --radius:14px; --shadow:0 1px 2px rgba(60,40,10,.06),0 2px 10px rgba(60,40,10,.05);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15110D; --surface:#211B15; --surface-2:#2B241C; --text:#F3EDE4; --muted:#B9AC9C; --line:#3B3229;
+    --accent:#F2A93B; --accent-ink:#1A1206; --accent-soft:#3A2B14;
+    --warn-ink:#F7D08A; --warn-bg:#3A2D12; --danger-ink:#F6B3AC; --danger-bg:#3E1C18;
+    --shadow:none; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15110D; --surface:#211B15; --surface-2:#2B241C; --text:#F3EDE4; --muted:#B9AC9C; --line:#3B3229;
+  --accent:#F2A93B; --accent-ink:#1A1206; --accent-soft:#3A2B14;
+  --warn-ink:#F7D08A; --warn-bg:#3A2D12; --danger-ink:#F6B3AC; --danger-bg:#3E1C18;
+  --shadow:none; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+a{color:var(--accent)}
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:calc(env(safe-area-inset-top, 0px) + 10px) 10px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.top-in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:10px;min-height:36px}
+.top h1{font-size:18px;margin:0;font-weight:650;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.icon-btn{appearance:none;border:0;background:var(--surface-2);color:var(--text);width:36px;height:36px;border-radius:10px;display:grid;place-items:center;cursor:pointer;flex:none;font-size:20px;line-height:1}
+.icon-btn svg{width:20px;height:20px}
+main{max-width:640px;margin:0 auto;padding-block:16px calc(96px + env(safe-area-inset-bottom, 0px));padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;z-index:5;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom, 0px);padding-left:env(safe-area-inset-left, 0px);padding-right:env(safe-area-inset-right, 0px)}
+.tabs-in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px 10px;color:var(--muted);text-decoration:none;font-size:12px;font-weight:600}
+.tabs a svg{width:24px;height:24px}
+.tabs a[aria-current="page"]{color:var(--accent)}
+h2{font-size:20px;margin:24px 0 8px;line-height:1.3}
+h3{font-size:16px;margin:20px 0 8px}
+p{margin:8px 0}
+.lead{color:var(--muted);margin:0 0 16px}
+.small{font-size:14px;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin:12px 0}
+.list{display:grid;gap:10px;margin:12px 0}
+a.item{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;color:var(--text);text-decoration:none}
+a.item:active{transform:scale(.99)}
+.badge{flex:none;width:36px;height:36px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:15px}
+.badge svg{width:20px;height:20px}
+.item-t{font-weight:650;display:block}
+.item-s{font-size:14px;color:var(--muted);display:block}
+.chev{margin-left:auto;color:var(--muted);flex:none}
+.group-t{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:24px 0 4px}
+.rule{background:var(--accent-soft);border-radius:var(--radius);padding:14px 16px;margin:0 0 8px}
+.rule strong{color:var(--accent)}
+.fields{display:grid;gap:12px}
+.field{display:grid;gap:4px;min-width:0}
+.field>span{font-size:14px;font-weight:600;color:var(--muted)}
+.inp{display:flex;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0 12px;min-height:46px}
+.inp:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.inp input,.inp select,.inp textarea{flex:1;min-width:0;width:100%;border:0;background:transparent;color:var(--text);font:inherit;font-size:17px;padding:10px 0;outline:none}
+.inp textarea{min-height:72px;resize:vertical}
+.inp em{font-style:normal;color:var(--muted);margin-left:8px;font-size:15px}
+select{appearance:none;-webkit-appearance:none}
+.inp.sel{position:relative}
+.inp.sel::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.check{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--muted);font-size:15px;min-height:44px}
+.check input{width:22px;height:22px;accent-color:var(--accent)}
+.results{margin-top:16px;border-top:2px solid var(--accent);padding-top:4px}
+.res{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.res:last-child{border-bottom:0}
+.res .l{color:var(--muted);font-size:15px}
+.res .l.sub{padding-left:14px}
+.res .v{font-variant-numeric:tabular-nums;font-weight:650;text-align:right;white-space:nowrap}
+.res .v small{font-weight:500;color:var(--muted);margin-left:4px}
+.res.main .l{color:var(--text);font-weight:650}
+.res.main .v{font-size:22px;color:var(--accent)}
+.res.text .v{white-space:normal;font-size:15px}
+.empty{color:var(--muted);font-size:15px;padding:12px 0}
+.callout{border-radius:12px;padding:12px 14px;margin:12px 0;font-size:15px}
+.callout.warn{background:var(--warn-bg);color:var(--warn-ink)}
+.callout.danger{background:var(--danger-bg);color:var(--danger-ink)}
+.callout.info{background:var(--surface-2);color:var(--text)}
+.callout ul{margin:6px 0 0;padding-left:20px}
+.callout li{margin:4px 0}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;margin:8px 0}
+ol.steps li{counter-increment:s;position:relative;padding:10px 0 10px 44px;border-bottom:1px solid var(--line)}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:9px;width:30px;height:30px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center;font-size:14px}
+ul.plain{padding-left:20px;margin:8px 0}
+ul.plain li{margin:6px 0}
+.src{font-size:13px;color:var(--muted);margin-top:16px}
+.btn{appearance:none;border:0;border-radius:12px;padding:0 18px;min-height:46px;font:inherit;font-weight:650;cursor:pointer;background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn.ghost{background:var(--surface-2);color:var(--text)}
+.btn.danger{background:var(--danger-bg);color:var(--danger-ink)}
+.btn.block{width:100%}
+.row-btns{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.row-btns .btn{flex:1 1 140px}
+.oil{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;padding:12px 0;border-bottom:1px solid var(--line)}
+.oil>*{min-width:0}
+.oil .sel{grid-column:1/-1}
+.oil .pct{grid-column:1/-1;font-size:13px;color:var(--muted);margin-top:-2px}
+.oil .icon-btn{width:46px;height:46px}
+table.t{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+table.t th,table.t td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t th{color:var(--muted);font-weight:650}
+.lote-meta{font-size:14px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:13px;background:var(--surface-2);border-radius:999px;padding:2px 10px;color:var(--text)}
+.computed{background:var(--accent-soft);border-radius:12px;padding:10px 14px;font-size:15px}
+.computed div{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
+.computed b{font-variant-numeric:tabular-nums}
+details.card summary{cursor:pointer;font-weight:650;list-style:none}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"+";float:right;color:var(--muted);font-weight:400}
+details.card[open] summary::after{content:"–"}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <button class="icon-btn" id="back" aria-label="Atrás" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <h1 id="title">Propóleo</h1>
+</div></header>
+<main id="view" tabindex="-1"></main>
+<nav class="tabs" aria-label="Secciones"><div class="tabs-in">
+  <a href="#" data-tab="recetas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L5 18a2 2 0 0 0 1.7 3h10.6A2 2 0 0 0 19 18l-5-9V3"/><path d="M7.5 14h9"/></svg>Recetas</a>
+  <a href="#h" data-tab="h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg>Calculadoras</a>
+  <a href="#b" data-tab="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>Bitácora</a>
+  <a href="#g" data-tab="g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>Guía</a>
+</div></nav>
+
+<script>
+"use strict";
+/* ---------- utilidades ---------- */
+const DENS_ALC70 = 0.89; // g/mL aproximado del alcohol al 70 %
+const ALLOW_DOWNLOAD = true; // la versión publicada como enlace lo pone en false: ese visor no permite descargas
+const store = {
+  // Devuelve siempre una copia del valor por defecto, para no modificar las constantes.
+  get(k, d){ const copy = () => d === undefined ? d : JSON.parse(JSON.stringify(d)); try{ const v = localStorage.getItem("propoleo." + k); return v ? JSON.parse(v) : copy(); }catch(e){ return copy(); } },
+  set(k, v){ try{ localStorage.setItem("propoleo." + k, JSON.stringify(v)); }catch(e){} }
+};
+const num = v => { if (typeof v === "number") return v; const n = parseFloat(String(v ?? "").trim().replace(",", ".")); return Number.isFinite(n) ? n : NaN; };
+const fmt = (n, d = 1) => Number.isFinite(n) ? n.toLocaleString("es-MX", { minimumFractionDigits: 0, maximumFractionDigits: d }) : "—";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const pos = (...xs) => xs.every(x => Number.isFinite(x) && x > 0);
+const fechaLarga = ms => new Date(ms).toLocaleString("es-MX", { weekday:"long", day:"numeric", month:"long", hour:"2-digit", minute:"2-digit" });
+const chev = '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+
+/* ---------- calculadoras ---------- */
+// Cada compute devuelve { rows:[[etiqueta, valor, unidad, decimales, opciones]], warn:[{level,text}], note:[texto] }
+const CALCS = {
+  alcohol: {
+    inputs: [
+      { k:"vol",  label:"Volumen final que quieres", unit:"mL", def:100 },
+      { k:"orig", label:"Graduación del alcohol que tienes", unit:"%", def:96 },
+      { k:"dest", label:"Graduación que quieres", unit:"%", def:70 }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.vol, v.orig, v.dest)) return o;
+      if (v.dest >= v.orig){ o.warn.push({ level:"danger", text:"La graduación que quieres debe ser menor que la del alcohol que tienes." }); return o; }
+      const alc = v.vol * v.dest / v.orig;
+      o.rows.push(["Alcohol de " + fmt(v.orig) + "°", alc, "mL", 1, { main:true }]);
+      o.rows.push(["Agua destilada (aprox.)", v.vol - alc, "mL", 1]);
+      o.note.push("Mide el alcohol y completa con agua destilada hasta el volumen final. La NOM indica 72.9 mL de alcohol al 96 % aforados a 100 mL; redondeado, 73 + 27 mL.");
+      return o;
+    }
+  },
+  tintura: {
+    inputs: [
+      { k:"g",      label:"Propóleo limpio y molido", unit:"g", def:50 },
+      { k:"rel",    label:"Alcohol al 70 % por gramo", unit:"mL/g", def:3 },
+      { k:"orig",   label:"Graduación de tu alcohol", unit:"%", def:96 },
+      { k:"inicio", label:"Inicio de la maceración (opcional)", type:"datetime" }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.g, v.rel, v.orig)) return o;
+      if (v.orig <= 70){ o.warn.push({ level:"danger", text:"Necesitas alcohol de más de 70° para preparar alcohol al 70 %." }); return o; }
+      const ml = v.g * v.rel, a = ml * 70 / v.orig;
+      o.rows.push(["Alcohol al 70 %", ml, "mL", 0, { main:true }]);
+      o.rows.push(["de alcohol de " + fmt(v.orig) + "°", a, "mL", 1, { sub:true }]);
+      o.rows.push(["de agua destilada (aprox.)", ml - a, "mL", 1, { sub:true }]);
+      if (v.inicio){
+        const t = Date.parse(v.inicio);
+        if (Number.isFinite(t)) o.rows.push(["Filtra a partir de", fechaLarga(t + 72 * 3600e3), "", 0, { text:true }]);
+      }
+      if (v.rel !== 3) o.note.push("La regla de la NOM es 1:3 (1 g por 3 mL).");
+      return o;
+    }
+  },
+  blando: {
+    inputs: [
+      { k:"ml",  label:"Tintura filtrada", unit:"mL", def:100 },
+      { k:"ext", label:"Extracto seco de tu tintura", unit:"%", def:12.3 }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.ml, v.ext)) return o;
+      const masa = v.ml * DENS_ALC70;
+      o.rows.push(["Peso aprox. de la tintura", masa, "g", 0]);
+      o.rows.push(["Extracto blando esperado", masa * v.ext / 100, "g", 1, { main:true }]);
+      o.note.push("Estimación: supone 0.89 g por mL de tintura. El 12.3 % es un valor de ejemplo; mide el tuyo en Calculadoras › Extracto seco.");
+      return o;
+    }
+  },
+  pomadaA: {
+    inputs: [ { k:"total", label:"Pomada que quieres hacer", unit:"g", def:30 } ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.total)) return o;
+      o.rows.push(["Extracto blando (5 %)", v.total * .05, "g", 1, { main:true }]);
+      o.rows.push(["Lanolina (15 %)", v.total * .15, "g", 1]);
+      o.rows.push(["Vaselina (80 %)", v.total * .80, "g", 1]);
+      return o;
+    }
+  },
+  pomadaB: {
+    inputs: [
+      { k:"total", label:"Pomada que quieres hacer", unit:"g", def:100 },
+      { k:"pct",   label:"Extracto blando", unit:"%", def:3 }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.total, v.pct)) return o;
+      if (v.pct >= 100){ o.warn.push({ level:"danger", text:"El porcentaje debe ser menor que 100." }); return o; }
+      const e = v.total * v.pct / 100, base = v.total - e;
+      o.rows.push(["Extracto blando", e, "g", 1, { main:true }]);
+      o.rows.push(["Cera de abeja limpia", base / 11, "g", 1]);
+      o.rows.push(["Aceite de girasol", base * 10 / 11, "g", 1]);
+      if (v.pct !== 3) o.note.push("La fuente (Ramanauskiene et al., 2021) usa 3 %.");
+      return o;
+    }
+  },
+  cremaA: {
+    inputs: [
+      { k:"total", label:"Crema que quieres hacer", unit:"g", def:100 },
+      { k:"pct",   label:"Extracto blando", unit:"%", def:3 }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.total, v.pct)) return o;
+      if (v.pct >= 100){ o.warn.push({ level:"danger", text:"El porcentaje debe ser menor que 100." }); return o; }
+      const e = v.total * v.pct / 100;
+      o.rows.push(["Extracto blando", e, "g", 1, { main:true }]);
+      o.rows.push(["Base de crema neutra con conservador", v.total - e, "g", 1]);
+      return o;
+    }
+  },
+  cremaB: {
+    inputs: [ { k:"total", label:"Crema que quieres hacer", unit:"g", def:100 } ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.total)) return o;
+      // gramos del CINAT para 300 g + 0.6 g de metilparabeno (total 300.6 g)
+      const F = [["Aceite de almendras",87.38],["Ácido esteárico",8.74],["Alcohol cetílico",14.56],["Metilparabeno (conservador)",0.6],["Trietanolamina",4.37],["Agua destilada",174.76],["Extracto blando de propóleo",4.37],["Esencia (opcional)",5.82]];
+      const T = F.reduce((s, x) => s + x[1], 0);
+      F.forEach(([n, g]) => o.rows.push([n, v.total * g / T, "g", g < 1 ? 2 : 1, { main: n.startsWith("Extracto") }]));
+      o.note.push("Proporciones del manual del CINAT (Costa Rica). El metilparabeno (0.2 %) es el de su crema hidratante, porque la tabla original no lo trae.");
+      return o;
+    }
+  },
+  jabonG: {
+    inputs: [
+      { k:"base", label:"Base de jabón de glicerina", unit:"g", def:400 },
+      { k:"pct",  label:"Tintura de propóleo", unit:"%", def:1 },
+      { k:"ext",  label:"Extracto seco de tu tintura", unit:"%", def:12.3 },
+      { k:"miel", label:"Agregar miel (opcional)", type:"check" }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.base, v.pct, v.ext)) return o;
+      const t = v.base * v.pct / 100, prop = v.pct * v.ext / 100;
+      o.rows.push(["Tintura de propóleo", t, "g", 1, { main:true }]);
+      o.rows.push(["equivale a", t / DENS_ALC70, "mL", 1, { sub:true }]);
+      if (v.miel) o.rows.push(["Miel", v.base * 10 / 400, "mL", 1]);
+      o.rows.push(["Propóleo puro en el jabón", prop, "%", 2]);
+      o.rows.push(["Barras de 100 g (aprox.)", v.base / 100, "", 0]);
+      if (prop > 0.5) o.warn.push({ level:"warn", text:"Pasas el tope de 0.5 % de propóleo que sigue la industria para jabones (Prokit). Baja el porcentaje de tintura." });
+      return o;
+    }
+  },
+  impurezas: {
+    inputs: [
+      { k:"sucio",  label:"Peso sin limpiar", unit:"g", def:250 },
+      { k:"limpio", label:"Peso limpio", unit:"g", def:226 }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.sucio, v.limpio)) return o;
+      if (v.limpio > v.sucio){ o.warn.push({ level:"danger", text:"El peso limpio no puede ser mayor que el peso sin limpiar." }); return o; }
+      o.rows.push(["Impurezas", (v.sucio - v.limpio) / v.sucio * 100, "%", 1, { main:true }]);
+      o.rows.push(["Basura retirada", v.sucio - v.limpio, "g", 1]);
+      o.rows.push(["Alcohol al 70 % para macerar (1:3)", v.limpio * 3, "mL", 0]);
+      o.note.push("Lo común es perder entre 10 % y 34 % al limpiar.");
+      return o;
+    }
+  },
+  seco: {
+    inputs: [
+      { k:"A", label:"A · Recipiente limpio y seco", unit:"g", def:122.10 },
+      { k:"B", label:"B · Recipiente con 30 mL de tintura", unit:"g", def:146.07 },
+      { k:"C", label:"C · Recipiente con el extracto seco", unit:"g", def:125.05 }
+    ],
+    compute(v){
+      const o = { rows:[], warn:[], note:[] };
+      if (!pos(v.A, v.B, v.C)) return o;
+      if (!(v.B > v.A) || !(v.C >= v.A) || !(v.C <= v.B)){ o.warn.push({ level:"danger", text:"Revisa los pesos: debe cumplirse A < C < B." }); return o; }
+      o.rows.push(["Extracto seco", (v.C - v.A) / (v.B - v.A) * 100, "%", 2, { main:true }]);
+      o.rows.push(["Peso de la tintura (B − A)", v.B - v.A, "g", 2]);
+      o.rows.push(["Peso del extracto seco (C − A)", v.C - v.A, "g", 2]);
+      o.note.push("La NOM no fija un mínimo para este dato; úsalo para comparar tus lotes. Ejemplo: 12.30 %.");
+      return o;
+    }
+  }
+};
+
+/* ---------- calculadora de sosa ---------- */
+const OILS = [
+  { id:"oliva",     name:"Aceite de oliva",            sap:0.135 },
+  { id:"coco",      name:"Aceite de coco",             sap:0.182 },
+  { id:"ricino",    name:"Aceite de ricino",           sap:0.129 },
+  { id:"almendras", name:"Aceite de almendras dulces", sap:0.139 },
+  { id:"cartamo",   name:"Aceite de cártamo",          sap:0.137 },
+  { id:"girasol",   name:"Aceite de girasol",          sap:0.137 },
+  { id:"palma",     name:"Aceite de palma",            sap:0.142 },
+  { id:"karite",    name:"Manteca de karité",          sap:0.129 },
+  { id:"cacao",     name:"Manteca de cacao",           sap:0.139 },
+  { id:"mango",     name:"Manteca de mango",           sap:0.134 },
+  { id:"cerdo",     name:"Manteca de cerdo",           sap:0.141 },
+  { id:"otro",      name:"Otro (escribe su índice)",   sap:null }
+];
+const SOSA_DEF = { rows:[{ oil:"oliva", g:"350", sap:"0.135" }, { oil:"coco", g:"150", sap:"0.182" }], sf:"5", agua:"38", prop:"0.5" };
+
+function sosaCompute(st){
+  const o = { rows:[], warn:[], note:[] };
+  let oils = 0, naoh100 = 0, missing = false;
+  st.rows.forEach(r => { const g = num(r.g), s = num(r.sap); if (g > 0){ oils += g; if (s > 0) naoh100 += g * s; else missing = true; } });
+  const sf = num(st.sf), wp = num(st.agua), pp = num(st.prop);
+  if (!(oils > 0)) return o;
+  if (missing){ o.warn.push({ level:"danger", text:"Falta el índice de saponificación (NaOH) de algún aceite." }); return o; }
+  if (!Number.isFinite(sf) || !(wp > 0) || !Number.isFinite(pp)) return o;
+  const naoh = naoh100 * (1 - sf / 100), water = oils * wp / 100, conc = naoh / (naoh + water) * 100, ext = oils * pp / 100;
+  o.rows.push(["Sosa cáustica (NaOH)", naoh, "g", 1, { main:true }]);
+  o.rows.push(["Agua destilada", water, "g", 0]);
+  o.rows.push(["Aceites en total", oils, "g", 0]);
+  if (ext > 0){
+    o.rows.push(["Extracto blando de propóleo", ext, "g", 1]);
+    o.rows.push(["Aceite tibio para deshacerlo (×4, de los mismos aceites)", ext * 4, "g", 0, { sub:true }]);
+  }
+  o.rows.push(["Concentración de la sosa", conc, "%", 1]);
+  o.rows.push(["Peso total de la mezcla", oils + naoh + water + ext, "g", 0]);
+  o.rows.push(["Barras de 100 g (aprox.)", Math.floor((oils + naoh + water + ext) / 100), "", 0]);
+  if (sf < 0) o.warn.push({ level:"danger", text:"Un margen de grasa negativo deja sosa libre en el jabón. No lo uses." });
+  else if (sf < 5) o.warn.push({ level:"warn", text:"SoapCalc recomienda un margen de grasa mínimo de 5 %." });
+  if (conc > 40) o.warn.push({ level:"danger", text:"La sosa pasa del 40 %: la reacción puede no completarse y quedar sosa libre. Agrega agua." });
+  if (pp > 0.5) o.warn.push({ level:"warn", text:"Pasas el tope de 0.5 % de propóleo que sigue la industria para jabones." });
+  o.note.push("Comprueba siempre la fórmula en SoapCalc con los índices que dé tu proveedor de aceites.");
+  return o;
+}
+
+/* ---------- recetas ---------- */
+const RECIPES = [
+  { id:"r1", n:1, group:"Bases", title:"Alcohol al 70 %", sum:"73 mL de alcohol de 96° por cada 100 mL.", calc:"alcohol",
+    intro:"Es la base de todo: las resinas activas del propóleo se disuelven en etanol, no en agua.",
+    steps:[ "Mide el alcohol en la probeta, con el ojo a la altura del menisco.", "Vacíalo en un frasco limpio y completa con agua destilada hasta el volumen final.", "Mezcla, tapa y etiqueta «Alcohol 70 %» con la fecha." ],
+    callouts:[{ level:"warn", text:"Los alcoholes desnaturalizados o de «uso externo» no son para consumo. Para gotas que se ingieran usa alcohol de 96° sin desnaturalizar, de grado alimenticio." }],
+    src:"NOM-003-SAG/GAN-2017 (6.3.3.1)." },
+  { id:"r2", n:2, group:"Bases", title:"Tintura de propóleo (EEP) 1:3", sum:"1 g de propóleo por 3 mL de alcohol al 70 %, 72 h.", calc:"tintura",
+    intro:"El extracto etanólico de propóleo. Ya es un producto terminado.",
+    steps:[ "Pesa el propóleo limpio y recién molido.", "Prepara el alcohol al 70 % que indica la calculadora (receta 1).", "Pon el propóleo en un frasco ámbar, añade el alcohol, tapa bien y etiqueta con lote, fecha, gramos y mililitros.", "Macera <strong>72 horas con agitación constante</strong>: agitador magnético 72 h, baño de ultrasonido 2 ciclos de 30 min (la NOM indica 20 min) o a mano varias veces al día.", "Mantén el frasco a temperatura ambiente, lejos de la luz y del calor.", "Filtra con filtro de papel para café en un embudo y recibe el líquido en un frasco ámbar limpio.", "Mide y anota el volumen de tintura que obtuviste.", "Envasa, etiqueta y guarda en refrigeración, protegido de la luz." ],
+    callouts:[{ level:"info", text:"Lo que queda en el filtro es sobre todo cera: no se disuelve en alcohol y es 20 a 35 % del propóleo." }],
+    src:"NOM-003-SAG/GAN-2017 (6.3.1)." },
+  { id:"r3", n:3, group:"Bases", title:"Extracto blando", sum:"La tintura sin alcohol, evaporada a 60 °C máximo.", calc:"blando",
+    intro:"Pasta oscura y espesa, base para pomadas, cremas y jabones.",
+    steps:[ "Pesa un recipiente de vidrio amplio, limpio y seco, y vierte la tintura.", "Cúbrelo con papel aluminio para protegerlo de la luz y el polvo.", "Evapora el alcohol <strong>sin pasar de 60 °C</strong>: estufa de secado (por ejemplo, a 50 °C), parrilla eléctrica a temperatura baja o rotavapor.", "Termina cuando quede una pasta espesa y el peso ya no baje. Como referencia, 30 mL tardan unos 3 días a 50 °C.", "Guarda en refrigeración, protegido de la luz, hasta usarlo." ],
+    callouts:[{ level:"danger", text:"El alcohol es inflamable: trabaja con ventilación y sin flamas (nada de estufa de gas)." }],
+    src:"NOM-003-SAG/GAN-2017." },
+  { id:"r4a", n:"4A", group:"Productos", title:"Pomada de vaselina y lanolina 5 %", sum:"Sin calor. La más sencilla para empezar.", calc:"pomadaA",
+    intro:"Fórmula de un hospital cubano, aplicada en 414 pacientes sin reacciones adversas.",
+    steps:[ "Saca el extracto blando del refrigerador un rato antes, para que sea más fácil de trabajar.", "Pon la lanolina en un mortero o recipiente de vidrio y agrega el extracto blando poco a poco, frotando sin parar hasta que la mezcla sea uniforme.", "Agrega la vaselina sin dejar de mover, hasta integrarla por completo.", "Envasa en frasco ámbar, etiqueta y guarda en refrigeración." ],
+    src:"Quintana Díaz, Álvarez Campos y Fernández Fregio (2003). Revista de Ciencias Médicas La Habana, 9(2)." },
+  { id:"r4b", n:"4B", group:"Productos", title:"Pomada de cera y aceite 3 %", sum:"Cera de abeja y aceite de girasol 1:10.", calc:"pomadaB",
+    intro:"En la prueba con piel humana, esta pomada hizo penetrar más compuestos fenólicos que una crema con vaselina (2 % contra 1.5 %).",
+    steps:[ "Derrite la cera en el aceite a baño maría, a fuego bajo.", "Retira del fuego y deja enfriar hasta unos 50 °C, con la mezcla todavía líquida; mídelo con termómetro.", "Deshaz el extracto blando en una cucharada de la mezcla tibia y luego incorpóralo al resto.", "Mueve hasta que empiece a espesar, envasa en frasco ámbar, etiqueta y refrigera." ],
+    src:"Ramanauskiene et al. (2021). Acta Pharmaceutica, 71, 657–667. Límite de temperatura: 60 °C de este recetario y 54 °C de Utah State University Extension." },
+  { id:"r5a", n:"5A", group:"Productos", title:"Crema con base comercial 3 %", sum:"Base neutra ya conservada + extracto blando.", calc:"cremaA",
+    intro:"Toda crema lleva agua y necesita conservador; comprar la base ya conservada evita que se contamine.",
+    steps:[ "Pon el extracto blando en un mortero o recipiente de vidrio y agrégale una cucharada de la base.", "Frota hasta que no queden grumos.", "Incorpora el resto de la base poco a poco, sin dejar de mover.", "Envasa en frasco ámbar, etiqueta y refrigera." ],
+    src:"Concentración: Ramanauskiene et al. (2021). Acta Pharmaceutica, 71, 657–667." },
+  { id:"r5b", n:"5B", group:"Productos", title:"Crema desde cero (CINAT)", sum:"Emulsión con almendras, 1.5 % de extracto.", calc:"cremaB",
+    intro:"Diseñada como crema para peinar, con estructura de crema básica. Compra los insumos en una tienda de materias primas cosméticas y usa guantes.",
+    steps:[ "Pesa todos los ingredientes.", "<strong>Fase oleosa:</strong> calienta aceite, ácido esteárico, alcohol cetílico y metilparabeno a baño maría, entre 60 y 70 °C, moviendo hasta disolver.", "<strong>Fase acuosa:</strong> en otro recipiente, calienta el agua con la trietanolamina a 60–70 °C, moviendo hasta disolver.", "Con las dos fases a la misma temperatura, retíralas del fuego. Pon la fase acuosa en una olla con agua a temperatura ambiente y, sin dejar de batir, agrega poco a poco la fase oleosa.", "Bate hasta que baje a 40–45 °C y agrega el extracto blando (deshecho antes en una cucharada de crema tibia) y la esencia.", "Envasa de inmediato para evitar grumos y tapa cuando enfríe." ],
+    callouts:[{ level:"info", text:"Si tienes piel sensible, omite la esencia." }],
+    src:"González Suárez (2017). Manual de Diversificación de Productos Apícolas. CINAT, Universidad Nacional de Costa Rica." },
+  { id:"r6", n:6, group:"Productos", title:"Jabón con base de glicerina", sum:"Sin sosa. Base derretida + 1 % de tintura.", calc:"jabonG",
+    intro:"La base ya está hecha; solo se derrite y se le agrega la tintura.",
+    steps:[ "Engrasa los moldes por dentro con aceite mineral, usando un pincel.", "Corta la base de glicerina en trozos pequeños.", "Derrítela a baño maría, moviendo, sin que hierva y sin pasar de 60 °C.", "Retira del fuego, agrega la tintura (y la miel, si la usas) y mezcla bien.", "Vierte en los moldes y rocía alcohol al 70 % sobre la superficie para quitar las burbujas.", "Refrigera 1 hora y desmolda.", "Envuelve cada jabón en papel estraza una semana para que seque." ],
+    src:"Franco José (2022). Manual de cosmetología con productos de las abejas. Tesis, FMVZ, UNAM. Tope de propóleo: Prokit." },
+  { id:"r7", n:7, group:"Productos", title:"Jabón en frío con sosa", sum:"Calculadora de sosa incluida.", calc:"sosa",
+    intro:"Jabón hecho desde aceites. Pide más cuidado y de 4 a 6 semanas de curado antes de usarse.",
+    steps:[ "Ponte el equipo de protección, ventila el área y saca a niños y mascotas.", "Pesa todos los ingredientes por separado, en gramos.", "Pon el agua destilada en un recipiente de acero inoxidable y agrega poco a poco la sosa, moviendo. No respires el vapor. Déjala enfriar.", "Derrite los aceites sólidos a fuego bajo y mézclalos con los líquidos; aparta el aceite para el propóleo.", "Calienta el aceite apartado a unos 50 °C y deshaz en él el extracto blando.", "Cuando la sosa y los aceites estén entre 32 y 35 °C, vierte la sosa sobre los aceites y bate con licuadora de inmersión hasta la «traza» ligera: espesa como una crema y un hilo que cae deja marca un momento.", "Agrega la mezcla de propóleo, bate unos segundos y vierte de inmediato en el molde forrado con papel para hornear.", "Deja reposar 24 horas, desmolda con guantes y corta en barras.", "Cura las barras de 4 a 6 semanas en un lugar fresco, ventilado y sin sol, separadas entre sí. No las uses antes." ],
+    src:"Índices: The Soapery y Certified Lye. Margen y agua: SoapCalc. Seguridad: Certified Lye. Reposo y curado: Prieto Vidal et al. (2018), Molecules 23(9):2356. Propóleo: Prokit." }
+];
+const SAFETY_SOSA = `<div class="callout danger"><strong>Seguridad con la sosa</strong><ul>
+<li>Lentes de seguridad, guantes resistentes a químicos, manga larga y buena ventilación.</li>
+<li><strong>Siempre la sosa sobre el agua, nunca el agua sobre la sosa.</strong> Se calienta mucho.</li>
+<li>Nada de aluminio, zinc, estaño ni latón. Usa acero inoxidable, exclusivo para jabón.</li>
+<li>Que la sosa nunca toque azúcar ni miel.</li>
+<li>Si te salpica: piel, enjuaga con mucha agua al menos 15 min; ojos, al menos 20 min. Busca atención médica. Solo agua.</li>
+<li>Niños y mascotas fuera del área.</li></ul></div>`;
+
+const TOOLS = [
+  { id:"impurezas", title:"Impurezas de limpieza", sum:"Cuánto se perdió al limpiar el propóleo.", how:"Pesa el propóleo antes y después de quitarle la basura con pinzas." },
+  { id:"seco", title:"Extracto seco (%)", sum:"Cuánto propóleo disuelto trae tu tintura.", how:"Tara la báscula, pesa el recipiente (A), agrega 30 mL de tintura (B), evapora en estufa a 50 °C (unos 3 días) y pesa de nuevo (C)." },
+  { id:"alcohol", title:"Dilución de alcohol", sum:"Cualquier graduación, no solo 70 %.", how:"Escribe el volumen final y las dos graduaciones." },
+  { id:"sosa", title:"Calculadora de sosa", sum:"Jabón en frío con cualquier mezcla de aceites.", recipe:"r7" }
+];
+
+/* ---------- render de calculadoras ---------- */
+function resultsHTML(o){
+  let h = "";
+  if (!o.rows.length && !o.warn.length) h += '<div class="empty">Escribe las cantidades para ver el resultado.</div>';
+  o.rows.forEach(([l, v, u, d, opt = {}]) => {
+    const val = typeof v === "number" ? fmt(v, d) + (u ? "<small>" + esc(u) + "</small>" : "") : esc(v);
+    h += `<div class="res${opt.main ? " main" : ""}${opt.text ? " text" : ""}"><span class="l${opt.sub ? " sub" : ""}">${esc(l)}</span><span class="v">${val}</span></div>`;
+  });
+  o.warn.forEach(w => { h += `<div class="callout ${w.level}">${esc(w.text)}</div>`; });
+  o.note.forEach(n => { h += `<p class="small">${esc(n)}</p>`; });
+  return h;
+}
+function fieldHTML(inp, val, cid){
+  const fid = `f-${cid}-${inp.k}`;
+  if (inp.type === "check") return `<label class="check"><input type="checkbox" id="${fid}" data-k="${inp.k}"${val ? " checked" : ""}> ${esc(inp.label)}</label>`;
+  if (inp.type === "datetime") return `<label class="field"><span>${esc(inp.label)}</span><div class="inp"><input type="datetime-local" id="${fid}" data-k="${inp.k}" value="${esc(val || "")}"></div></label>`;
+  return `<label class="field"><span>${esc(inp.label)}</span><div class="inp"><input type="text" inputmode="decimal" autocomplete="off" id="${fid}" data-k="${inp.k}" value="${esc(val)}"><em>${esc(inp.unit || "")}</em></div></label>`;
+}
+function calcCard(id){
+  if (id === "sosa") return sosaCard();
+  const c = CALCS[id], saved = store.get("in." + id, {});
+  const fields = c.inputs.map(i => fieldHTML(i, saved[i.k] !== undefined ? saved[i.k] : (i.def ?? ""), id)).join("");
+  return `<section class="card" data-calc="${id}"><div class="fields">${fields}</div><div class="results" aria-live="polite"></div>
+  <div class="row-btns"><button class="btn ghost" data-reset="${id}" type="button">Restablecer valores</button></div></section>`;
+}
+function bindCalc(root){
+  root.querySelectorAll("[data-calc]").forEach(card => {
+    const id = card.dataset.calc;
+    if (id === "sosa") return bindSosa(card);
+    const c = CALCS[id];
+    const run = () => {
+      const raw = {}, v = {};
+      card.querySelectorAll("[data-k]").forEach(el => {
+        const k = el.dataset.k;
+        if (el.type === "checkbox"){ raw[k] = el.checked; v[k] = el.checked; }
+        else if (el.type === "datetime-local"){ raw[k] = el.value; v[k] = el.value; }
+        else { raw[k] = el.value; v[k] = num(el.value); }
+      });
+      store.set("in." + id, raw);
+      card.querySelector(".results").innerHTML = resultsHTML(c.compute(v));
+    };
+    card.addEventListener("input", run);
+    card.addEventListener("change", run);
+    card.querySelector("[data-reset]").addEventListener("click", () => { store.set("in." + id, {}); card.outerHTML = calcCard(id); bindCalc(root); });
+    run();
+  });
+}
+function oilOptions(sel){
+  return OILS.map(o => `<option value="${o.id}"${o.id === sel ? " selected" : ""}>${esc(o.name)}</option>`).join("");
+}
+function sosaCard(){
+  const st = store.get("sosa", SOSA_DEF);
+  const rows = st.rows.map((r, i) => `<div class="oil" data-i="${i}">
+    <div class="inp sel"><select id="sosa-oil-${i}" data-f="oil" aria-label="Aceite ${i + 1}">${oilOptions(r.oil)}</select></div>
+    <label class="field"><span>Peso</span><div class="inp"><input type="text" inputmode="decimal" id="sosa-g-${i}" data-f="g" value="${esc(r.g)}"><em>g</em></div></label>
+    <label class="field"><span>Índice NaOH</span><div class="inp"><input type="text" inputmode="decimal" id="sosa-sap-${i}" data-f="sap" value="${esc(r.sap)}"></div></label>
+    <button class="icon-btn" type="button" data-del="${i}" aria-label="Quitar este aceite">×</button>
+    <div class="pct" data-pct></div></div>`).join("");
+  return `<section class="card" data-calc="sosa">
+    <h3 style="margin-top:0">Aceites</h3><div data-oils>${rows}</div>
+    <div class="row-btns"><button class="btn ghost" type="button" data-add>+ Agregar aceite</button></div>
+    <div class="fields">
+      <label class="field"><span>Margen de grasa (superfat)</span><div class="inp"><input type="text" inputmode="decimal" id="sosa-sf" data-p="sf" value="${esc(st.sf)}"><em>%</em></div></label>
+      <label class="field"><span>Agua, como % del peso de los aceites</span><div class="inp"><input type="text" inputmode="decimal" id="sosa-agua" data-p="agua" value="${esc(st.agua)}"><em>%</em></div></label>
+      <label class="field"><span>Extracto blando, como % de los aceites</span><div class="inp"><input type="text" inputmode="decimal" id="sosa-prop" data-p="prop" value="${esc(st.prop)}"><em>%</em></div></label>
+    </div>
+    <div class="results" aria-live="polite"></div>
+    <div class="row-btns"><button class="btn ghost" type="button" data-reset-sosa>Volver a la receta del manual</button></div>
+    <p class="small">Valores de inicio: 5 % de margen (mínimo de SoapCalc), 38 % de agua (lo que SoapCalc recomienda a principiantes) y 0.5 % de propóleo (tope de la industria).</p>
+  </section>`;
+}
+function bindSosa(card){
+  const st = store.get("sosa", SOSA_DEF);
+  const save = () => store.set("sosa", st);
+  const run = () => {
+    const tot = st.rows.reduce((s, r) => s + (num(r.g) > 0 ? num(r.g) : 0), 0);
+    card.querySelectorAll(".oil").forEach(el => { const r = st.rows[+el.dataset.i]; const g = num(r.g); el.querySelector("[data-pct]").textContent = tot > 0 && g > 0 ? fmt(g / tot * 100, 1) + " % de los aceites" : ""; });
+    card.querySelector(".results").innerHTML = resultsHTML(sosaCompute(st));
+  };
+  const rerender = () => { save(); const fresh = document.createElement("div"); fresh.innerHTML = sosaCard(); const n = fresh.firstElementChild; card.replaceWith(n); bindSosa(n); };
+  card.addEventListener("input", e => {
+    const t = e.target, row = t.closest(".oil");
+    if (row && t.dataset.f && t.dataset.f !== "oil"){ st.rows[+row.dataset.i][t.dataset.f] = t.value; }
+    if (t.dataset.p){ st[t.dataset.p] = t.value; }
+    save(); run();
+  });
+  card.addEventListener("change", e => {
+    const t = e.target, row = t.closest(".oil");
+    if (row && t.dataset.f === "oil"){
+      const r = st.rows[+row.dataset.i], oil = OILS.find(o => o.id === t.value);
+      r.oil = t.value; r.sap = oil && oil.sap ? String(oil.sap) : "";
+      row.querySelector('[data-f="sap"]').value = r.sap; save(); run();
+      if (!r.sap) row.querySelector('[data-f="sap"]').focus();
+    }
+  });
+  card.addEventListener("click", e => {
+    const del = e.target.closest("[data-del]");
+    if (del){ st.rows.splice(+del.dataset.del, 1); if (!st.rows.length) st.rows.push({ oil:"oliva", g:"", sap:"0.135" }); rerender(); }
+    if (e.target.closest("[data-add]")){ st.rows.push({ oil:"oliva", g:"", sap:"0.135" }); rerender(); }
+    if (e.target.closest("[data-reset-sosa]")){ Object.assign(st, JSON.parse(JSON.stringify(SOSA_DEF))); rerender(); }
+  });
+  run();
+}
+
+/* ---------- bitácora ---------- */
+const LOTE_FIELDS = [
+  { k:"lote", label:"Número de lote", type:"text" },
+  { k:"cosecha", label:"Fecha de cosecha", type:"date" },
+  { k:"origen", label:"Lugar de origen del propóleo", type:"text" },
+  { k:"sucio", label:"Peso sin limpiar", unit:"g", type:"num" },
+  { k:"limpio", label:"Peso limpio", unit:"g", type:"num" },
+  { k:"tipoAlcohol", label:"Tipo de alcohol", type:"select", options:["", "Grado alimenticio", "Uso externo"] },
+  { k:"inicio", label:"Inicio de maceración", type:"datetime-local" },
+  { k:"agitacion", label:"Agitación", type:"select", options:["", "Agitador magnético", "Ultrasonido", "Manual"] },
+  { k:"filtrado", label:"Fecha de filtrado", type:"date" },
+  { k:"tintura", label:"Tintura obtenida", unit:"mL", type:"num" },
+  { k:"extSeco", label:"Extracto seco", unit:"%", type:"num" },
+  { k:"sensorial", label:"Color, aroma, sabor y consistencia", type:"textarea" },
+  { k:"blando", label:"Extracto blando obtenido", unit:"g", type:"num" },
+  { k:"obs", label:"Observaciones", type:"textarea" }
+];
+const lotes = () => store.get("lotes", []);
+function loteComputed(l){
+  const s = num(l.sucio), c = num(l.limpio), out = [];
+  if (pos(s, c) && c <= s) out.push(["Impurezas", fmt((s - c) / s * 100, 1) + " %"]);
+  if (pos(c)){ const ml = c * 3; out.push(["Alcohol al 70 % (1:3)", fmt(ml, 0) + " mL"]); out.push(["de alcohol 96° + agua", fmt(ml * 70 / 96, 0) + " + " + fmt(ml - ml * 70 / 96, 0) + " mL"]); }
+  if (l.inicio){ const t = Date.parse(l.inicio); if (Number.isFinite(t)) out.push(["Filtrar a partir de", fechaLarga(t + 72 * 3600e3)]); }
+  return out;
+}
+function renderBitacora(){
+  const ls = lotes().slice().sort((a, b) => (b.creado || 0) - (a.creado || 0));
+  let h = `<p class="lead">Un registro por lote, desde la cosecha hasta el envasado. Se guarda solo en este dispositivo.</p>
+  <div class="row-btns"><a class="btn" href="#b-nuevo">+ Nuevo lote</a>${ls.length ? (ALLOW_DOWNLOAD ? '<button class="btn ghost" type="button" id="csv">Descargar CSV</button>' : "") + '<button class="btn ghost" type="button" id="copiar">Copiar para Excel</button>' : ""}</div>
+  <p class="small" id="copy-msg" aria-live="polite"></p><div id="copy-box"></div>`;
+  if (!ls.length) h += '<div class="card"><p style="margin:0">Aún no tienes lotes. Crea el primero cuando empieces a limpiar tu propóleo.</p></div>';
+  h += '<div class="list">' + ls.map(l => {
+    const chips = [l.limpio ? fmt(num(l.limpio), 1) + " g limpio" : "", l.tintura ? fmt(num(l.tintura), 0) + " mL de tintura" : "", l.extSeco ? fmt(num(l.extSeco), 2) + " % seco" : ""].filter(Boolean);
+    return `<a class="item" href="#b-${esc(l.id)}"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></span>
+      <span style="min-width:0"><span class="item-t">${esc(l.lote || "Lote sin número")}</span><span class="lote-meta">${esc([l.origen, l.cosecha].filter(Boolean).join(" · ") || "Sin datos de origen")}</span>
+      ${chips.length ? '<span class="chips">' + chips.map(c => `<span class="chip">${esc(c)}</span>`).join("") + "</span>" : ""}</span>${chev}</a>`;
+  }).join("") + "</div>";
+  return h;
+}
+function loteFieldHTML(f, v){
+  const val = esc(v ?? "");
+  let ctl;
+  const fid = "lote-" + f.k;
+  if (f.type === "textarea") ctl = `<textarea id="${fid}" data-lk="${f.k}">${val}</textarea>`;
+  else if (f.type === "select") ctl = `<select id="${fid}" data-lk="${f.k}">${f.options.map(o => `<option value="${esc(o)}"${o === v ? " selected" : ""}>${esc(o || "Elegir…")}</option>`).join("")}</select>`;
+  else if (f.type === "num") ctl = `<input type="text" inputmode="decimal" id="${fid}" data-lk="${f.k}" value="${val}">`;
+  else ctl = `<input type="${f.type}" id="${fid}" data-lk="${f.k}" value="${val}">`;
+  return `<label class="field"><span>${esc(f.label)}</span><div class="inp${f.type === "select" ? " sel" : ""}">${ctl}${f.unit ? `<em>${esc(f.unit)}</em>` : ""}</div></label>`;
+}
+function renderLote(id){
+  const l = id === "nuevo" ? { id:"" } : lotes().find(x => x.id === id);
+  if (!l) return '<div class="card">No encontré ese lote.</div>';
+  return `<form id="lote-form" class="card" autocomplete="off"><div class="fields">${LOTE_FIELDS.map(f => loteFieldHTML(f, l[f.k])).join("")}</div>
+    <h3>Cálculos del lote</h3><div class="computed" id="lote-calc"></div>
+    <div class="row-btns"><button class="btn" type="submit">Guardar lote</button>${l.id ? '<button class="btn danger" type="button" id="del-lote">Borrar lote</button>' : ""}</div>
+    <div class="callout danger" id="del-confirm" hidden><p style="margin:0 0 10px">¿Borrar este lote? No se puede deshacer.</p>
+    <div class="row-btns" style="margin:0"><button class="btn danger" type="button" id="del-si">Sí, borrar</button><button class="btn ghost" type="button" id="del-no">Cancelar</button></div></div></form>`;
+}
+function bindLote(id){
+  const form = document.getElementById("lote-form");
+  if (!form) return;
+  const read = () => { const o = {}; form.querySelectorAll("[data-lk]").forEach(el => o[el.dataset.lk] = el.value.trim()); return o; };
+  const upd = () => { const c = loteComputed(read()); document.getElementById("lote-calc").innerHTML = c.length ? c.map(([a, b]) => `<div><span>${esc(a)}</span><b>${esc(b)}</b></div>`).join("") : "Escribe los pesos y la fecha de inicio para ver los cálculos."; };
+  form.addEventListener("input", upd); upd();
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const all = lotes(), data = read();
+    if (id === "nuevo"){ data.id = Date.now().toString(36); data.creado = Date.now(); all.push(data); }
+    else { const i = all.findIndex(x => x.id === id); if (i < 0) return; Object.assign(all[i], data); }
+    store.set("lotes", all); location.hash = "#b";
+  });
+  const del = document.getElementById("del-lote"), box = document.getElementById("del-confirm");
+  if (del){
+    del.addEventListener("click", () => { box.hidden = false; document.getElementById("del-no").focus(); });
+    document.getElementById("del-no").addEventListener("click", () => { box.hidden = true; del.focus(); });
+    document.getElementById("del-si").addEventListener("click", () => { store.set("lotes", lotes().filter(x => x.id !== id)); location.hash = "#b"; });
+  }
+}
+function loteTable(){
+  const head = LOTE_FIELDS.map(f => f.label + (f.unit ? " (" + f.unit + ")" : "")).concat(["Impurezas (%)"]);
+  return [head].concat(lotes().map(l => {
+    const s = num(l.sucio), c = num(l.limpio);
+    const imp = pos(s, c) && c <= s ? ((s - c) / s * 100).toFixed(1) : "";
+    return LOTE_FIELDS.map(f => l[f.k] ?? "").concat([imp]);
+  }));
+}
+function exportCSV(){
+  const q = s => '"' + String(s ?? "").replace(/"/g, '""') + '"';
+  const csv = loteTable().map(r => r.map(q).join(",")).join("\r\n");
+  const blob = new Blob(["﻿" + csv], { type:"text/csv;charset=utf-8" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "bitacora-propoleo.csv";
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function copyTSV(){
+  // Tabuladores: al pegar en Excel o Google Sheets, cada dato cae en su columna.
+  const tsv = loteTable().map(r => r.map(v => String(v ?? "").replace(/[\t\r\n]+/g, " ")).join("\t")).join("\n");
+  const msg = document.getElementById("copy-msg"), boxEl = document.getElementById("copy-box");
+  const fallback = () => {
+    boxEl.innerHTML = '<div class="inp"><textarea id="copy-area" aria-label="Bitácora para copiar" readonly></textarea></div>';
+    const ta = document.getElementById("copy-area"); ta.value = tsv; ta.focus(); ta.select();
+    msg.textContent = "Selecciona el texto de abajo, cópialo y pégalo en Excel.";
+  };
+  try {
+    navigator.clipboard.writeText(tsv).then(() => { boxEl.innerHTML = ""; msg.textContent = "Copiado. Pégalo en una hoja de Excel o Google Sheets."; }, fallback);
+  } catch (e) { fallback(); }
+}
+
+/* ---------- guía ---------- */
+const GUIA = `
+<p class="lead">Resumen del manual. Para el detalle, consulta tu Manual de elaboración de propóleo.</p>
+<details class="card" open><summary>Lo que pide la NOM-003-SAG/GAN-2017</summary>
+<p>Obligatoria para quien produzca, acondicione, almacene o importe propóleo o sus extractos <strong>para venderlos</strong> en México.</p>
+<table class="t"><thead><tr><th>Parámetro</th><th>Requisito</th></tr></thead><tbody>
+<tr><td>Color</td><td>Rojo, amarillo-rojizo, amarillo oscuro, verde castaño, pardo o negro</td></tr>
+<tr><td>Aroma</td><td>Resinoso (a madera) o balsámico (a cera)</td></tr>
+<tr><td>Sabor</td><td>De suave balsámico a fuerte y picante</td></tr>
+<tr><td>Consistencia</td><td>Maleable entre 20 y 40 °C; rígido abajo de 20 °C</td></tr>
+<tr><td>Flavonoides y fenoles</td><td>Presencia</td></tr>
+<tr><td>Índice de oxidación</td><td>Máximo 22 segundos</td></tr>
+<tr><td>Compuestos fenólicos</td><td>Mínimo 5 % p/p (eq. ácido gálico)</td></tr>
+<tr><td>Flavonoides</td><td>Mínimo 0.5 % p/p (eq. quercetina)</td></tr>
+<tr><td>Actividad antioxidante (CA50)</td><td>100 µg/mL</td></tr>
+<tr><td>Antimicrobiana</td><td>Frente a <em>S. aureus</em>, <em>E. coli</em> y <em>C. albicans</em></td></tr>
+</tbody></table>
+<ul class="plain"><li>Congelar las trampas entre −10 y −20 °C al menos 1 hora.</li><li>Sin sol, sin calor, sin mezclar con cera y sin tocarlo con las manos.</li><li>El análisis de laboratorio vale 1 año para el mismo lote y lugar.</li></ul>
+</details>
+<details class="card"><summary>Precauciones de uso</summary>
+<ul class="plain">
+<li><strong>Alergia:</strong> prueba una gota en el antebrazo y espera 24 a 48 horas.</li>
+<li><strong>Alcohol:</strong> la tintura no es para niños, embarazadas, lactancia ni quien no deba consumir alcohol, sin indicación médica.</li>
+<li><strong>Uso externo:</strong> lo hecho con alcohol desnaturalizado nunca se ingiere.</li>
+<li><strong>Medicamentos:</strong> si tomas anticoagulantes u otros, consulta a tu médico.</li>
+<li><strong>Mascotas:</strong> solo con indicación del veterinario.</li>
+<li>No sustituye un diagnóstico ni un tratamiento. Fuera del alcance de los niños.</li>
+</ul></details>
+<details class="card"><summary>Envasado, etiqueta y almacenamiento</summary>
+<ul class="plain"><li>Frasco ámbar con tapa hermética: la luz degrada fenoles y flavonoides.</li>
+<li>Etiqueta: nombre, contenido neto, lote, fecha, origen, «Consérvese en refrigeración y protegido de la luz» y «Uso externo» si aplica.</li>
+<li>Para vender, revisa la NOM-051-SCFI y la NOM-030-SCFI vigentes.</li>
+<li>Propóleo en bruto, tintura y extracto: en refrigeración y sin luz.</li></ul></details>
+<details class="card"><summary>Análisis de laboratorio (LASAP)</summary>
+<p>LASAP, FES Cuautitlán, UNAM. Muestra: 50 g de propóleo en greña.</p>
+<ul class="plain"><li>Dr. Tonatiuh A. Cruz Sánchez, responsable general: <a href="mailto:tonatiuhcruz8@gmail.com">tonatiuhcruz8@gmail.com</a></li>
+<li>Dra. Betsabé Rodríguez Pérez, responsable técnico: <a href="mailto:betsarguez79@gmail.com">betsarguez79@gmail.com</a></li>
+<li><a href="http://www.cuautitlan.unam.mx/liem/s_lsap.html" target="_blank" rel="noopener">cuautitlan.unam.mx/liem/s_lsap.html</a></li></ul></details>
+<details class="card"><summary>Fuentes</summary>
+<ul class="plain small">
+<li>NOM-003-SAG/GAN-2017. DOF, 31 de agosto de 2017.</li>
+<li>Quintana Díaz et al. (2003). Rev. Ciencias Médicas La Habana, 9(2).</li>
+<li>Ramanauskiene et al. (2021). Acta Pharmaceutica, 71, 657–667.</li>
+<li>Meredith, Hunsaker y Walker Bravo (2025). Utah State University Extension.</li>
+<li>González Suárez (2017). CINAT, Universidad Nacional de Costa Rica.</li>
+<li>Franco José (2022). Tesis, FMVZ, UNAM.</li>
+<li>Prieto Vidal et al. (2018). Molecules, 23(9), 2356.</li>
+<li>The Soapery, SoapCalc, Certified Lye, Prokit y Wikipedia (índices, margen, agua y seguridad).</li>
+</ul></details>
+<p class="small">Esta app resume un manual personal y no sustituye la indicación de un médico o veterinario. Versión 1.0.</p>`;
+
+/* ---------- vistas ---------- */
+function viewRecetas(){
+  let h = `<div class="rule">Regla base: <strong>1 g de propóleo limpio por 3 mL de alcohol al 70 %, macerado 72 horas.</strong></div>`;
+  let g = "";
+  RECIPES.forEach(r => {
+    if (r.group !== g){ g = r.group; h += (g === "Bases" ? "" : "</div>") + `<div class="group-t">${esc(g)}</div><div class="list">`; }
+    h += `<a class="item" href="#r-${r.id}"><span class="badge">${esc(r.n)}</span><span><span class="item-t">${esc(r.title)}</span><span class="item-s">${esc(r.sum)}</span></span>${chev}</a>`;
+  });
+  return h + "</div>";
+}
+function viewReceta(id){
+  const r = RECIPES.find(x => x.id === id);
+  if (!r) return null;
+  let h = `<p class="lead">${esc(r.intro)}</p>`;
+  if (r.id === "r7") h += SAFETY_SOSA;
+  h += calcCard(r.calc);
+  (r.callouts || []).forEach(c => { h += `<div class="callout ${c.level}">${esc(c.text)}</div>`; });
+  h += `<h2>Pasos</h2><ol class="steps">${r.steps.map(s => `<li>${s}</li>`).join("")}</ol>`;
+  h += `<p class="src">Fuente: ${esc(r.src)}</p>`;
+  return { title: (typeof r.n === "number" ? "Receta " + r.n : "Receta " + r.n) + ". " + r.title, html: h };
+}
+function viewHerramientas(){
+  let h = '<p class="lead">Calculadoras sueltas. Cada receta trae además la suya.</p><div class="list">';
+  TOOLS.forEach(t => { h += `<a class="item" href="${t.recipe ? "#r-" + t.recipe : "#h-" + t.id}"><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span><span><span class="item-t">${esc(t.title)}</span><span class="item-s">${esc(t.sum)}</span></span>${chev}</a>`; });
+  h += '</div><div class="group-t">Calculadoras de las recetas</div><div class="list">';
+  RECIPES.forEach(r => { h += `<a class="item" href="#r-${r.id}"><span class="badge">${esc(r.n)}</span><span><span class="item-t">${esc(r.title)}</span></span>${chev}</a>`; });
+  return h + "</div>";
+}
+function viewHerramienta(id){
+  const t = TOOLS.find(x => x.id === id);
+  if (!t || t.recipe) return null;
+  return { title: t.title, html: `<p class="lead">${esc(t.how)}</p>` + calcCard(id) };
+}
+
+const view = document.getElementById("view"), titleEl = document.getElementById("title"), backBtn = document.getElementById("back");
+let backTo = "";
+// Rutas: #r-<receta>, #h, #h-<calculadora>, #b, #b-<lote|nuevo>, #g (solo letras, números y guiones).
+function route(){
+  const hash = location.hash.replace(/^#/, "");
+  const cut = hash.indexOf("-");
+  const sec = cut < 0 ? hash : hash.slice(0, cut), id = cut < 0 ? "" : hash.slice(cut + 1);
+  let tab = "recetas", title = "", html = "", back = null, after = null;
+  if (sec === "r" && id){ const v = viewReceta(id); if (v){ title = v.title; html = v.html; back = ""; } }
+  else if (sec === "h"){ tab = "h"; if (id){ const v = viewHerramienta(id); if (v){ title = v.title; html = v.html; back = "#h"; } } if (!html){ title = "Calculadoras"; html = viewHerramientas(); } }
+  else if (sec === "b"){ tab = "b"; if (id){ title = id === "nuevo" ? "Nuevo lote" : "Editar lote"; html = renderLote(id); back = "#b"; after = () => bindLote(id); } else { title = "Bitácora de lotes"; html = renderBitacora(); after = () => { const b = document.getElementById("csv"); if (b) b.addEventListener("click", exportCSV); const c = document.getElementById("copiar"); if (c) c.addEventListener("click", copyTSV); }; } }
+  else if (sec === "g"){ tab = "g"; title = "Guía"; html = GUIA; }
+  if (!html){ html = viewRecetas(); title = "Recetario de propóleo"; }
+  view.innerHTML = html; titleEl.textContent = title; backBtn.hidden = back === null; backTo = back || "";
+  document.title = title === "Recetario de propóleo" ? title : title + " · Propóleo";
+  document.querySelectorAll(".tabs a").forEach(a => { if (a.dataset.tab === tab) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  bindCalc(view); if (after) after();
+  window.scrollTo(0, 0);
+}
+backBtn.addEventListener("click", () => { location.hash = backTo; });
+window.addEventListener("hashchange", route);
+route();
+
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}
+</script>
+</body>
+</html>
